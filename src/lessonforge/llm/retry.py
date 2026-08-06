@@ -41,7 +41,7 @@ def make_api_retry() -> Any:
         before_sleep=lambda rs: logger.warning(
             "LLM API error (attempt %d/4): %s — retrying…",
             rs.attempt_number,
-            rs.outcome.exception(),
+            rs.outcome.exception() if rs.outcome is not None else "unknown",
         ),
         reraise=True,
     )

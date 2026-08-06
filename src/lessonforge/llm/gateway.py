@@ -201,24 +201,29 @@ class Gateway:
             {"role": "user", "content": request.user},
         ]
 
-        @self._api_retry  # type: ignore[misc]
+        api_retry = make_api_retry()
+
         def _raw_call(system: str, user: str) -> str:
             msgs = [
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
             ]
-            try:
-                resp = litellm.completion(
-                    model=model_id,
-                    messages=msgs,
-                    temperature=temperature,
-                    seed=seed,
-                    response_format={"type": "json_object"},
-                )
-                return str(resp.choices[0].message.content)
-            except Exception as exc:
-                logger.error("[gateway] LiteLLM error: %s", exc)
-                raise LLMError(str(exc)) from exc
+
+            def _attempt() -> str:
+                try:
+                    resp = litellm.completion(
+                        model=model_id,
+                        messages=msgs,
+                        temperature=temperature,
+                        seed=seed,
+                        response_format={"type": "json_object"},
+                    )
+                    return str(resp.choices[0].message.content)
+                except Exception as exc:
+                    logger.error("[gateway] LiteLLM error: %s", exc)
+                    raise LLMError(str(exc)) from exc
+
+            return str(api_retry(_attempt)())
 
         payload, reask = call_with_reask(
             call_fn=_raw_call,

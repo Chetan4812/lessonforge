@@ -69,7 +69,31 @@ def ground(
     k: int = typer.Option(8, "--k", help="Number of chunks to retrieve."),
 ) -> None:
     """[bold]Retrieve[/bold] grounding chunks from the corpus (M2)."""
-    console.print(f"[yellow]⚙  M0 stub — ground wired in M2. topic={topic} k={k}[/yellow]")
+    from rich.table import Table
+
+    from lessonforge.config import AppConfig
+    from lessonforge.grounding.retriever import retrieve
+
+    cfg = AppConfig()
+
+    console.print(f"\n[bold magenta]LessonForge Ground[/bold magenta] · topic=[cyan]{topic}[/cyan] k=[cyan]{k}[/cyan]\n")
+
+    with console.status("[bold green]Building / loading index and retrieving chunks…"):
+        pack = retrieve(query=topic, config=cfg)
+
+    table = Table(title=f"Retrieved {len(pack.chunks)} chunks · corpus v{pack.corpus_version}", show_lines=True)
+    table.add_column("ID", style="cyan", no_wrap=True)
+    table.add_column("Heading", style="yellow")
+    table.add_column("Tokens", justify="right", style="green")
+    table.add_column("Preview", max_width=60)
+
+    for chunk in pack.chunks:
+        preview = chunk.text[:120].replace("\n", " ") + ("…" if len(chunk.text) > 120 else "")
+        table.add_row(chunk.id, chunk.title[:40], str(len(chunk.text.split())), preview)
+
+    console.print(table)
+    console.print(f"\n[green]✓[/green] Corpus version: [dim]{pack.corpus_version}[/dim]")
+
 
 
 # ── batch ─────────────────────────────────────────────────────────────────────
