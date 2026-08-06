@@ -1,0 +1,29 @@
+{
+  "questions": [
+    "What does RAG stand for and what does it do in one sentence?",
+    "Name the five steps a RAG system uses to answer a question.",
+    "Why can a normal AI model give wrong or outdated answers?",
+    "Does RAG change the AI model itself? Explain why or why not.",
+    "What is a chunk and why is it useful in a RAG system?"
+  ],
+  "correct_answers": [
+    "RAG stands for Retrieval-Augmented Generation. It helps AI give better answers by first searching documents and using what it finds to write its response.",
+    "The five steps are: break documents into chunks, convert chunks into vectors, store vectors in an index, retrieve relevant chunks for the question, generate an answer using those chunks.",
+    "A normal AI model is trained on data up to a certain date. It does not know about events after that date or private documents, so it can give outdated or incorrect answers.",
+    "No, RAG does not change the AI model. The model's weights stay the same. RAG only gives the model extra text to read at the time of answering.",
+    "A chunk is a small piece of a larger document. It is useful because breaking documents into small pieces makes it easier for the system to find the most relevant part to answer a question."
+  ],
+  "learner_answers": [
+    "RAG means Retrieval-Augmented Generation. It is when the AI looks up documents before answering, not just from memory.",
+    "First you break documents into small pieces called chunks. Then you turn them into vectors. Then you store them in an index. Then when a question comes, you find the relevant chunks. Then the AI uses those chunks to write the answer.",
+    "Because it was trained only up to a certain time. After that it does not know new things. Also it does not know private things like your company files.",
+    "No it does not change the model. The lesson said the model weights never change. RAG just gives it more text to read when answering.",
+    "A chunk is a small part of a document. It helps because then the computer can find just the part that answers your question instead of searching the whole document."
+  ],
+  "scores": [1, 1, 1, 1, 1],
+  "total_score": 5,
+  "max_score": 5,
+  "check_id": "PRB-01",
+  "verdict": "PASS",
+  "reason": "The simulated learner answered all 5 questions correctly, demonstrating solid comprehension of the core RAG concepts."
+}

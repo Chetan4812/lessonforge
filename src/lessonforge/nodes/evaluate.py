@@ -18,6 +18,7 @@ from lessonforge.state import RunState, StructuralReport
 from lessonforge.validators.deterministic import compute_metrics
 from lessonforge.validators.deterministic import run_all as run_deterministic
 from lessonforge.validators.judges import run_all_judges
+from lessonforge.validators.persona_probe import run_persona_probe
 from lessonforge.validators.verdict import aggregate
 
 logger = logging.getLogger(__name__)
@@ -61,8 +62,19 @@ def run(state: RunState, gateway: LLMGateway, config: AppConfig | None = None) -
     )
     logger.info("[%s] Judge results: %d results", _NODE_NAME, len(judge_results))
 
-    # ── Step 3: Combine and compute metrics ───────────────────────────────────
-    all_results = det_results + judge_results
+    # ── Step 3: Persona probe (PRB-01) ───────────────────────────────────────
+    prb_result = run_persona_probe(
+        lesson=lesson,
+        gateway=gateway,
+        persona=state.persona,
+        run_id=state.run_id,
+        attempt=state.attempt,
+        config=cfg,
+    )
+    logger.info("[%s] Persona probe: %s", _NODE_NAME, prb_result.verdict)
+
+    # ── Step 4: Combine and compute metrics ───────────────────────────────────
+    all_results = det_results + judge_results + [prb_result]
     metrics = compute_metrics(lesson)
 
     structural_report = StructuralReport(
@@ -70,7 +82,7 @@ def run(state: RunState, gateway: LLMGateway, config: AppConfig | None = None) -
         metrics=metrics,
     )
 
-    # ── Step 4: Aggregate verdict ─────────────────────────────────────────────
+    # ── Step 5: Aggregate verdict ─────────────────────────────────────────────
     verdict = aggregate(all_results, state.attempt, cfg)
 
     logger.info(

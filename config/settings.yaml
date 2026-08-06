@@ -49,6 +49,8 @@ lesson:
   max_words: 1800
   max_fk_grade: 9.0
   max_avg_sentence_words: 20
+  persona_probe_question_count: 5   # how many comprehension questions to generate
+  persona_probe_min_score: 4        # PRB-01 threshold: learner must get ≥4/5 correct
   required_sections:
     - hook
     - what_it_is
