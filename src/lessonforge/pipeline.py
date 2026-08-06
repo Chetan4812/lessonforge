@@ -27,6 +27,8 @@ from lessonforge.llm.gateway import Gateway
 from lessonforge.nodes import blueprint as blueprint_node
 from lessonforge.nodes import evaluate as evaluate_node
 from lessonforge.nodes import generator as generator_node
+from lessonforge.nodes import persist as persist_node
+from lessonforge.nodes import recall as recall_node
 from lessonforge.nodes import repair as repair_node
 from lessonforge.output import write_outputs
 from lessonforge.state import LearnerPersona, RunState
@@ -80,7 +82,11 @@ def run(
         attempt=1,
     )
 
-    # ── Step 1: Ground ────────────────────────────────────────────────────────
+    # ── Step 0: Recall (load guardrails + exemplar from memory) ──────────────────
+    with _StepLogger("recall", state):
+        state = recall_node.run(state, cfg)
+
+    # ── Step 1: Ground ────────────────────────────────────────────────────
     with _StepLogger("ground", state):
         state = _run_ground(state, cfg)
 
@@ -94,7 +100,11 @@ def run(
 
     state = _eval_repair_loop(state, gw, cfg)
 
-    # ── Step 4: Write outputs ─────────────────────────────────────────────────
+    # ── Step 5: Persist to memory ────────────────────────────────────────────
+    with _StepLogger("persist", state):
+        state = persist_node.run(state, cfg)
+
+    # ── Step 6: Write outputs ──────────────────────────────────────────────
     if write:
         out_dir = write_outputs(state, cfg)
         logger.info("[pipeline] done — verdict=%s outputs=%s",

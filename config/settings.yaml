@@ -6,10 +6,10 @@ seed: 20260806
 
 models:
   blueprint:
-    id: "groq/llama-3.1-70b-versatile"
+    id: "groq/llama-3.3-70b-versatile"
     temperature: 0.4
   generator:
-    id: "groq/llama-3.1-70b-versatile"
+    id: "groq/llama-3.3-70b-versatile"
     temperature: 0.7
   judge_accuracy:
     id: "groq/mixtral-8x7b-32768"   # cross-family on purpose
@@ -27,10 +27,10 @@ models:
     id: "groq/llama-3.1-8b-instant"
     temperature: 0.6
   critique:
-    id: "groq/llama-3.1-70b-versatile"
+    id: "groq/llama-3.3-70b-versatile"
     temperature: 0.2
   evolve_analyst:
-    id: "groq/llama-3.1-70b-versatile"
+    id: "groq/llama-3.3-70b-versatile"
     temperature: 0.3
 
 self_consistency:

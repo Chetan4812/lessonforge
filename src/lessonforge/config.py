@@ -14,6 +14,7 @@ CONFIG_DIR = ROOT / "config"
 PROMPTS_DIR = ROOT / "prompts"
 CORPUS_DIR = ROOT / "corpus"
 OUT_DIR = ROOT / "out"
+CACHE_DIR = ROOT / ".cache"  # persistent cache: FAISS index + memory.db
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:

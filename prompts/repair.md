@@ -22,20 +22,32 @@ If the repair strategy is "full_rewrite", rewrite the entire lesson from scratch
 
 ## Output schema — SAME as the generator
 
+The `key` field MUST be one of these exact strings (no other values are valid):
+`hook`, `what_it_is`, `why_it_matters`, `how_it_works`, `analogy`,
+`worked_example`, `common_mistakes`, `glossary`, `recap`, `check_yourself`, `next_steps`
+
+All 11 sections MUST appear in this exact order.
+
 ```json
 {{
   "topic": "<same topic>",
   "title": "<title — may update if needed>",
   "sections": [
     {{
-      "key": "<section_key>",
+      "key": "hook",
       "heading": "<heading>",
       "body_md": "<repaired or verbatim body>"
     }},
-    ...
+    {{
+      "key": "what_it_is",
+      "heading": "<heading>",
+      "body_md": "<repaired or verbatim body>"
+    }},
+    ... (continue for all 11 keys in order: hook, what_it_is, why_it_matters, how_it_works, analogy, worked_example, common_mistakes, glossary, recap, check_yourself, next_steps)
   ]
 }}
 ```
+
 
 # USER
 
