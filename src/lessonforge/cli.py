@@ -26,7 +26,7 @@ console = Console()
 @app.command()
 def run(
     topic: str = typer.Option(..., "--topic", "-t", help="Topic to generate a lesson for."),
-    provider: str = typer.Option("openai", "--provider", help="LLM provider (openai | mock)."),
+    provider: str = typer.Option("groq", "--provider", help="LLM provider (groq | openai | mock)."),
     inject_error: str | None = typer.Option(
         None,
         "--inject-error",
@@ -36,6 +36,15 @@ def run(
     seed: int | None = typer.Option(None, "--seed", help="Override random seed."),
 ) -> None:
     """[bold green]Generate, evaluate, and ship[/bold green] a beginner lesson for TOPIC."""
+    import logging
+
+    from rich.table import Table
+
+    from lessonforge import pipeline
+
+    if verbose:
+        logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s — %(message)s")
+
     console.print(
         Panel(
             f"[bold]lessonforge run[/bold]\n"
@@ -44,7 +53,45 @@ def run(
             title="[bold magenta]LessonForge[/bold magenta]",
         )
     )
-    console.print("[yellow]⚙  M0 stub — graph execution wired in M3.[/yellow]")
+
+    with console.status("[bold green]Running pipeline…"):
+        state = pipeline.run(
+            topic=topic,
+            provider=provider,
+            inject_error=inject_error,
+            seed=seed,
+        )
+
+    verdict = state.verdict
+    ship = verdict.ship_decision if verdict else "UNKNOWN"
+    colour = {"SHIP": "green", "RETRY": "yellow", "ESCALATE": "red"}.get(ship, "white")
+
+    console.print(f"\n[bold {colour}]▶ Verdict: {ship}[/bold {colour}]  (attempt {state.attempt})\n")
+
+    if state.structural_report:
+        table = Table(title="Evaluation Results", show_lines=True)
+        table.add_column("Check", style="cyan", no_wrap=True)
+        table.add_column("Dimension", style="dim")
+        table.add_column("Result", justify="center")
+        table.add_column("Reason", max_width=55)
+
+        for r in state.structural_report.results:
+            icon = "[green]✓ PASS[/green]" if r.verdict == "PASS" else "[red]✗ FAIL[/red]"
+            table.add_row(r.check_id, r.dimension, icon, r.reason[:120])
+
+        console.print(table)
+
+    if ship == "SHIP" and state.lesson:
+        console.print(f"\n[green]✓[/green] Lesson shipped: [bold]{state.lesson.title}[/bold]")
+        console.print(f"  Run ID: [dim]{state.run_id}[/dim]")
+        console.print(f"  Output: [dim]out/{state.run_id}/lesson.md[/dim]")
+    elif ship == "ESCALATE":
+        console.print(
+            "[red]✗[/red] Lesson could not be fixed within the attempt budget. "
+            "See [dim]out/{state.run_id}/report.json[/dim] for details."
+        )
+
+
 
 
 # ── evaluate ──────────────────────────────────────────────────────────────────
