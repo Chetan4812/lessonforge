@@ -1,0 +1,40 @@
+{
+  "learning_objectives": [
+    "Define RAG and explain what 'retrieval-augmented' means",
+    "Describe the five steps of the RAG pipeline",
+    "Explain why RAG is useful compared to a model answering from memory alone",
+    "Identify at least two limitations of RAG"
+  ],
+  "central_analogy": "An open-book exam — the AI is allowed to look at a textbook before writing its answer, just like a student allowed to use notes",
+  "worked_example_scenario": "A college exam FAQ chatbot that answers student questions using the official 2024 student handbook",
+  "must_define_terms": [
+    "RAG",
+    "chunk",
+    "vector",
+    "index",
+    "retrieval",
+    "hallucination",
+    "embedding",
+    "token"
+  ],
+  "section_plan": [
+    {"key": "hook", "note": "Relatable scenario of looking up personal notes"},
+    {"key": "what_it_is", "note": "Plain definition, expand the acronym"},
+    {"key": "why_it_matters", "note": "Stale knowledge problem + private docs problem"},
+    {"key": "how_it_works", "note": "Five numbered steps, one sentence each"},
+    {"key": "analogy", "note": "Open-book exam comparison"},
+    {"key": "worked_example", "note": "College FAQ bot — before/after contrast"},
+    {"key": "common_mistakes", "note": "Retraining myth, hallucination claim, coverage gap"},
+    {"key": "glossary", "note": "All must_define_terms, <=25 words each"},
+    {"key": "recap", "note": "Three sentences summarising what/why/how"},
+    {"key": "check_yourself", "note": "Five comprehension questions"},
+    {"key": "next_steps", "note": "Vector DBs, embeddings, prompt engineering, fine-tuning"}
+  ],
+  "out_of_scope": [
+    "Specific vector database products (Pinecone, Weaviate, etc.)",
+    "Implementation code or API calls",
+    "Advanced retrieval techniques (HyDE, multi-query, re-ranking)",
+    "RAG evaluation metrics",
+    "Comparison of embedding models"
+  ]
+}

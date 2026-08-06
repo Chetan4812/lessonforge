@@ -1,0 +1,46 @@
+[
+  {
+    "check_id": "ACC-01",
+    "dimension": "accuracy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "No factual errors about RAG found. The lesson correctly states RAG retrieves documents at query time and does not retrain the model.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:accuracy"
+  },
+  {
+    "check_id": "ACC-02",
+    "dimension": "accuracy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "All factual claims carry [Sx] source tags that resolve to chunks in the grounding pack.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:accuracy"
+  },
+  {
+    "check_id": "ACC-03",
+    "dimension": "accuracy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "No invented statistics, dates, or named systems found.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:accuracy"
+  },
+  {
+    "check_id": "ACC-04",
+    "dimension": "accuracy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "The lesson explicitly states RAG reduces but does not remove hallucinations and names scenarios where it can still fail.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:accuracy"
+  }
+]

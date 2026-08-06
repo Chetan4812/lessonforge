@@ -6,31 +6,31 @@ seed: 20260806
 
 models:
   blueprint:
-    id: "gpt-4.1"
+    id: "groq/llama-3.1-70b-versatile"
     temperature: 0.4
   generator:
-    id: "gpt-4.1"
+    id: "groq/llama-3.1-70b-versatile"
     temperature: 0.7
   judge_accuracy:
-    id: "claude-sonnet-4-5"   # cross-family on purpose — reduces model blind-spot overlap
+    id: "groq/mixtral-8x7b-32768"   # cross-family on purpose
     temperature: 0.0
   judge_language:
-    id: "gpt-4.1-mini"
+    id: "groq/llama-3.1-8b-instant" # fast/cheap for checklist tasks
     temperature: 0.0
   judge_pedagogy:
-    id: "claude-sonnet-4-5"
+    id: "groq/mixtral-8x7b-32768"   # cross-family on purpose
     temperature: 0.2
   judge_coverage:
-    id: "gpt-4.1-mini"
+    id: "groq/llama-3.1-8b-instant"
     temperature: 0.0
   persona:
-    id: "gpt-4.1-mini"
+    id: "groq/llama-3.1-8b-instant"
     temperature: 0.6
   critique:
-    id: "gpt-4.1"
+    id: "groq/llama-3.1-70b-versatile"
     temperature: 0.2
   evolve_analyst:
-    id: "claude-sonnet-4-5"
+    id: "groq/llama-3.1-70b-versatile"
     temperature: 0.3
 
 self_consistency:

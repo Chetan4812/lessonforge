@@ -1,0 +1,57 @@
+[
+  {
+    "check_id": "EXM-01",
+    "dimension": "pedagogy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "A concrete end-to-end worked example is present covering question → retrieval → answer.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:pedagogy"
+  },
+  {
+    "check_id": "EXM-02",
+    "dimension": "pedagogy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "The example uses a college exam FAQ bot, which is a culturally appropriate Indian context.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:pedagogy"
+  },
+  {
+    "check_id": "EXM-03",
+    "dimension": "pedagogy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "An open-book exam analogy is present and clearly explains retrieval-before-answering.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:pedagogy"
+  },
+  {
+    "check_id": "EXM-04",
+    "dimension": "pedagogy",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "The worked example includes a before/after contrast showing non-RAG vs RAG answers.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:pedagogy"
+  },
+  {
+    "check_id": "FLW-01",
+    "dimension": "flow",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "No forward references found. All concepts are introduced before use.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:pedagogy"
+  }
+]

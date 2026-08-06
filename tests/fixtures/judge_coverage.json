@@ -1,0 +1,35 @@
+[
+  {
+    "check_id": "COV-01",
+    "dimension": "coverage",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "A plain definition of RAG appears in the what_it_is section within the first 200 words.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:coverage"
+  },
+  {
+    "check_id": "COV-02",
+    "dimension": "coverage",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "The why_it_matters section explains stale knowledge and private document limitations.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:coverage"
+  },
+  {
+    "check_id": "COV-03",
+    "dimension": "coverage",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "All five pipeline stages are explained: chunk, embed/vectorise, index, retrieve, generate.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:coverage"
+  }
+]

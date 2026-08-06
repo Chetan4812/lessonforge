@@ -1,0 +1,35 @@
+[
+  {
+    "check_id": "LNG-02",
+    "dimension": "language",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "All jargon terms are defined before or at first use.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:language"
+  },
+  {
+    "check_id": "LNG-03",
+    "dimension": "language",
+    "verdict": "PASS",
+    "severity": "hard",
+    "evidence_quote": null,
+    "reason": "No idioms or Western-culture-only references found. Examples use Indian college contexts.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:language"
+  },
+  {
+    "check_id": "LNG-04",
+    "dimension": "language",
+    "verdict": "PASS",
+    "severity": "advisory",
+    "evidence_quote": null,
+    "reason": "Sentence complexity is within acceptable bounds.",
+    "repair_instruction": null,
+    "section_key": null,
+    "judged_by": "judge:language"
+  }
+]

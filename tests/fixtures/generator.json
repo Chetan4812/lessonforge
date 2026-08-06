@@ -1,0 +1,61 @@
+{
+  "topic": "Introduction to RAG",
+  "title": "How AI Systems Look Up Information Before Answering",
+  "sections": [
+    {
+      "key": "hook",
+      "heading": "Have you ever wished your phone could answer questions about your own notes?",
+      "body_md": "Imagine you have hundreds of notes saved on your phone. When you ask a question, your phone searches through those notes and gives you an answer based on what is actually written there. That is the basic idea behind RAG. [S1]"
+    },
+    {
+      "key": "what_it_is",
+      "heading": "What is RAG?",
+      "body_md": "RAG stands for Retrieval-Augmented Generation. It is a method that helps AI give better answers by first searching a collection of documents, then using what it finds to write its response. [S1]\n\nIn plain words: the AI looks something up before it answers. It does not guess from memory alone."
+    },
+    {
+      "key": "why_it_matters",
+      "heading": "Why does RAG matter?",
+      "body_md": "Normal AI models are trained on data up to a certain date. They do not know about events after that date. They also do not know about private information, like your company's internal documents. [S2]\n\nRAG solves this by letting the AI search a separate, updated collection of documents at the moment you ask a question. This means the AI can answer using fresh, specific information instead of relying only on what it learned during training. [S2]"
+    },
+    {
+      "key": "how_it_works",
+      "heading": "How does RAG work? (5 steps)",
+      "body_md": "**Step 1 — Break documents into small pieces (chunks).** The documents in your collection are split into small sections. Each section is called a chunk. [S3]\n\n**Step 2 — Turn each chunk into a searchable form.** Each chunk is converted into a list of numbers called a vector. A vector is a way to represent meaning as numbers so the computer can compare them. [S3]\n\n**Step 3 — Store these vectors in an index.** An index is a structure that lets the computer search through millions of vectors very quickly. [S3]\n\n**Step 4 — Retrieve the most relevant chunks.** When you ask a question, your question is also turned into a vector. The system finds the chunks whose vectors are most similar to your question's vector. [S4]\n\n**Step 5 — Generate a grounded answer.** The found chunks are placed alongside your question in the prompt. The AI reads both and writes an answer based on the retrieved text. [S4]"
+    },
+    {
+      "key": "analogy",
+      "heading": "Think of it like an open-book exam",
+      "body_md": "Imagine two students taking an exam. The first student answers from memory alone. The second student can open a textbook and look up facts before writing their answer.\n\nThe second student will usually give more accurate answers, especially on specific facts. RAG gives the AI that same advantage — a textbook to look at before it answers. [S1]"
+    },
+    {
+      "key": "worked_example",
+      "heading": "A real example: college exam FAQ bot",
+      "body_md": "**Without RAG:**\nA student asks: 'What is the last date to submit the hostel form for 2024?'\nThe AI answers from its training data: 'Usually around the end of July.' This might be wrong because dates change every year.\n\n**With RAG:**\n1. The college uploads its 2024 student handbook to the RAG system.\n2. The student asks the same question.\n3. The system searches the handbook and finds the page with hostel deadlines.\n4. It places that page in the prompt.\n5. The AI reads the page and answers: 'The last date to submit the hostel form for 2024 is 15 August, as stated on page 12 of the student handbook.' [S4]\n\nThe RAG answer is specific, current, and points to a real source."
+    },
+    {
+      "key": "common_mistakes",
+      "heading": "Common misunderstandings about RAG",
+      "body_md": "**Mistake 1: RAG retrains the AI model.**\nNo. The AI model's weights are never changed. RAG only gives the model extra text to read at the time of answering. The model itself stays the same. [S5]\n\n**Mistake 2: RAG removes all hallucinations.**\nNo. RAG reduces wrong answers by grounding the response in retrieved text, but the AI can still make mistakes. For example, if the right document is not in the collection, or if the retrieval step finds the wrong chunk, the answer can still be wrong. [S5]\n\n**Mistake 3: RAG always finds the right information.**\nNo. If the information is not in your document collection, RAG cannot find it. The quality of answers depends heavily on the quality of your documents."
+    },
+    {
+      "key": "glossary",
+      "heading": "Key terms explained simply",
+      "body_md": "**RAG** — Retrieval-Augmented Generation. A way for AI to look up information before answering.\n\n**Chunk** — A small piece of a larger document, usually a few sentences or paragraphs.\n\n**Vector** — A list of numbers that represents the meaning of a piece of text so computers can compare texts by similarity.\n\n**Index** — A fast-search structure that stores vectors so the system can quickly find the most relevant chunks.\n\n**Retrieval** — The step where the system searches the index to find chunks relevant to the question.\n\n**Hallucination** — When an AI confidently states something that is not true or not supported by any source.\n\n**Embedding** — The process of converting text into a vector. The resulting vector is also called an embedding.\n\n**Token** — A small unit of text, roughly equal to one word or part of a word, that the AI processes at a time."
+    },
+    {
+      "key": "recap",
+      "heading": "Quick recap",
+      "body_md": "RAG is a method that gives AI a way to look up documents before answering. [S1] It works in five steps: chunk the documents, convert to vectors, store in an index, retrieve relevant chunks, and generate a grounded answer. [S3] [S4] It does not retrain the model and it does not remove all mistakes, but it makes answers more accurate and more specific than memory alone. [S5]"
+    },
+    {
+      "key": "check_yourself",
+      "heading": "Test yourself",
+      "body_md": "Try to answer these questions using only what you read above:\n\n1. What does RAG stand for?\n2. Name the five steps RAG uses to answer a question.\n3. Does RAG change the AI model's training? Why or why not?\n4. Give one example of a situation where RAG would still give a wrong answer.\n5. What is the difference between a chunk and a vector?"
+    },
+    {
+      "key": "next_steps",
+      "heading": "What to learn next",
+      "body_md": "Now that you understand RAG, here are good topics to explore next:\n\n- **Vector databases** — special databases built to store and search vectors at scale.\n- **Embeddings in more detail** — how text is converted into vectors using embedding models.\n- **Prompt engineering** — how to write better instructions for AI.\n- **Fine-tuning** — the other main way to give AI new knowledge, and how it is different from RAG."
+    }
+  ]
+}
