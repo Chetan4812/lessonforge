@@ -1,0 +1,206 @@
+{
+  "embeddings_and_vector_search": {
+    "chunks": [
+      {
+        "id": "S3-000",
+        "sha256": "3c1abb5ae57f6981364ade088ba0eb5ed8aa4655dff9a5daac29faa2821a35aa",
+        "heading": "What Is an Embedding?"
+      },
+      {
+        "id": "S3-001",
+        "sha256": "1a062ff93a213c3366b43c209e687b495261d2469d80dc47457b5aef09168fe4",
+        "heading": "How Embedding Models Work"
+      },
+      {
+        "id": "S3-002",
+        "sha256": "7ed47991350fa20c00c246a9c9af1493dd8607c241a4d3009fdd7780c3c50386",
+        "heading": "Cosine Similarity"
+      },
+      {
+        "id": "S3-003",
+        "sha256": "a9a877be00ddc491ff892bd3ac705d5c332880899da9eed638e26ce466ea8f4a",
+        "heading": "Vector Indexes and FAISS"
+      },
+      {
+        "id": "S3-004",
+        "sha256": "c91fa688b1fe03ca87e614c986d7fde5cc4400b7e7d76843c264a91ae864a08a",
+        "heading": "How FAISS Is Used in RAG"
+      },
+      {
+        "id": "S3-005",
+        "sha256": "cdb3a521b0bb9277dd8e82305247c2b2afb89aa8c1602d7fdd6ba2ca4580e006",
+        "heading": "Sentence-Transformers"
+      }
+    ]
+  },
+  "lewis_2020_rag_paper": {
+    "chunks": [
+      {
+        "id": "S1-000",
+        "sha256": "1d2491176a07582cd2b523320568d1ecec691625752a52f6239ebbee38fa5de0",
+        "heading": "What RAG Is"
+      },
+      {
+        "id": "S1-001",
+        "sha256": "fc8743c65d5664eb8a588ba5610fa03c2ec3e7e6b6bce15b1a0519e8f8e7fde0",
+        "heading": "Core Architecture Components"
+      },
+      {
+        "id": "S1-002",
+        "sha256": "dcf19c4e99ba4c85e9d0dd5dc599d19c3ab89e4b706feecbf14267739fa55734",
+        "heading": "Two RAG Variants"
+      },
+      {
+        "id": "S1-003",
+        "sha256": "91230525f5e39b5ec7ef6b4227012eda94570372841ebec1414a6564d78eaa5d",
+        "heading": "What RAG Solves"
+      },
+      {
+        "id": "S1-004",
+        "sha256": "12b29f134b0cd86dc300e68511b78e9e48b39df69ba28590c395f1b1a0a5a2cc",
+        "heading": "Important Limitation: RAG Does Not Eliminate Hallucination"
+      }
+    ]
+  },
+  "rag_limitations": {
+    "chunks": [
+      {
+        "id": "S5-000",
+        "sha256": "4ac1701d35919ef443b76995313abda8f73c0d2c944024f646bb9f513a69ba71",
+        "heading": "Failure Mode 1: Retrieval Miss"
+      },
+      {
+        "id": "S5-001",
+        "sha256": "5f4d34df1605f78c00f426583db46f6106cdbbd9bd84cb2765906156b1986677",
+        "heading": "Failure Mode 2: Retrieval of Wrong Passage"
+      },
+      {
+        "id": "S5-002",
+        "sha256": "eb6f6bac6e74337e0e85bc1cb4e14c4c9822f029ae55f306bc89b093d4501db0",
+        "heading": "Failure Mode 3: Chunking Destroys Context"
+      },
+      {
+        "id": "S5-003",
+        "sha256": "43bcf50cfd2054e76e993d8ce81b3a7a6d4622a48dc4ccb896442f0c7c6f7a4e",
+        "heading": "Failure Mode 4: Document Store Is Stale or Incomplete"
+      },
+      {
+        "id": "S5-004",
+        "sha256": "983afd787cd1ed9775c1020b94da81b10ca18823316d45010ed099114c098264",
+        "heading": "Failure Mode 5: Generator Ignores Retrieved Context"
+      },
+      {
+        "id": "S5-005",
+        "sha256": "7ab079532e4d23d217a82d636d73f671dc8ff9d943f93e13ce8cb595054b77ca",
+        "heading": "Failure Mode 6: Context Window Overflow"
+      },
+      {
+        "id": "S5-006",
+        "sha256": "02d3a807f43e744b4b777b54a135d221ae11af11ae95fba0f9905f640ed283c9",
+        "heading": "Failure Mode 7: Hallucination Still Occurs"
+      },
+      {
+        "id": "S5-007",
+        "sha256": "02cc5dc7a0ab96d4c837dfaf4b31db672b7458829e5735fbbc4344d9bbd30663",
+        "heading": "Summary of Failure Modes"
+      }
+    ]
+  },
+  "rag_pipeline_reference": {
+    "chunks": [
+      {
+        "id": "S2-000",
+        "sha256": "34b8c2fb20240f2b1a05cb9d2fcda904b9670abeb1476840b82837a20e51df6f",
+        "heading": "Step 2: Chunking (Splitting)"
+      },
+      {
+        "id": "S2-001",
+        "sha256": "f9d30531179413ce655a6727497a7df12253c77cff6db7576819f60b50f6d061",
+        "heading": "Step 2: Chunking (Splitting)"
+      },
+      {
+        "id": "S2-002",
+        "sha256": "ac38fdb629314140b80f82e3520c0317d8a9962e49ac1542f79dc0ea16f15b62",
+        "heading": "Step 3: Embedding"
+      },
+      {
+        "id": "S2-003",
+        "sha256": "4ff16a0585d923ba301408ec4c5fe79b911963d481898bf30c4cd7ea5eb3007c",
+        "heading": "Step 4: Indexing"
+      },
+      {
+        "id": "S2-004",
+        "sha256": "704ab2a6f0b28f8fc76a2ecebf2985b5a2a5fb8a8e31bf949e83d046edb154cd",
+        "heading": "Step 7: Augmentation (Prompt Construction)"
+      },
+      {
+        "id": "S2-005",
+        "sha256": "1541141bdab980460c48fec4e5d2e3ed9f3ba05befd91d6666978da66156df95",
+        "heading": "The Grounding Contract"
+      }
+    ]
+  },
+  "rag_vs_finetuning": {
+    "chunks": [
+      {
+        "id": "S4-000",
+        "sha256": "5d15efd1307ea3974f7f24007fe8abd2771dc5a5c7bd6093c366757150337621",
+        "heading": "Comparison Table"
+      },
+      {
+        "id": "S4-001",
+        "sha256": "189d07c47762c658634ad30501bb47f5002ba885376863d6369b4d864a332b2e",
+        "heading": "Comparison Table"
+      },
+      {
+        "id": "S4-002",
+        "sha256": "6ff14874f57f984ecaed7f6d6d6cecd381b34a9396d5590112f728255d9f5d80",
+        "heading": "When RAG Is the Better Choice"
+      },
+      {
+        "id": "S4-003",
+        "sha256": "8f518a00438468fcc0517240d0a1ce18f65a19e910650ca42d8ecd58dc1fe235",
+        "heading": "Using Both Together"
+      },
+      {
+        "id": "S4-004",
+        "sha256": "447b0f518462cf8da789769f53031a286c2bbe032ee5cc65607cf799239c4127",
+        "heading": "Important: Fine-Tuning vs RAG for This Lesson"
+      }
+    ]
+  },
+  "real_world_use_cases": {
+    "chunks": [
+      {
+        "id": "S6-000",
+        "sha256": "79e7871efd3413319a1e12daa80fc0af9940d8ba3e6cd6f7fbb147eba81b2a63",
+        "heading": "Use Case 1: Customer Support Bots"
+      },
+      {
+        "id": "S6-001",
+        "sha256": "b557d5dbaf10c738a199f0066afb6f4dd4ef73c4634ec1e152a33bb25200976c",
+        "heading": "Use Case 2: Internal Document Q&A"
+      },
+      {
+        "id": "S6-002",
+        "sha256": "d70b631dc190752215b141c025ebf6a781bacb8bfd5a1ff1d7834cc735db4edf",
+        "heading": "Use Case 3: Compliance and Legal Research"
+      },
+      {
+        "id": "S6-003",
+        "sha256": "58bb7d61435b47c29b8a9a35e0788eedae28dc723e4d815c0b69e9bad82705e8",
+        "heading": "Use Case 4: Education and Learning Platforms"
+      },
+      {
+        "id": "S6-004",
+        "sha256": "0ba004f61f5b8d787939034e60f26a5db451c491d8bbf7ca44414ca66626e1be",
+        "heading": "Use Case 6: Government Scheme Helpdesks (Indian Context)"
+      },
+      {
+        "id": "S6-005",
+        "sha256": "8569a57e4adbe6cdb914a87ab1a4aa573cc9e7fbd8f7229fadff94916a7c3619",
+        "heading": "Common Properties Across Use Cases"
+      }
+    ]
+  }
+}
