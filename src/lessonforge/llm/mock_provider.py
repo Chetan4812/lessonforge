@@ -93,14 +93,17 @@ class MockProvider:
         candidate = self._dir / f"{role}.json"
         if candidate.exists():
             with open(candidate, encoding="utf-8") as f:
-                return dict(json.load(f))
+                data = json.load(f)
+            # Judge fixtures are JSON arrays → wrap for uniform parsing
+            return {"results": data} if isinstance(data, list) else dict(data)
 
         # fallback
         fallback = self._dir / "generator.json"
         if fallback.exists():
             logger.debug("[mock] no fixture for role=%s, using generator fallback", role)
             with open(fallback, encoding="utf-8") as f:
-                return dict(json.load(f))
+                data = json.load(f)
+            return {"results": data} if isinstance(data, list) else dict(data)
 
         raise FileNotFoundError(
             f"No fixture found for role '{role}' in {self._dir}. "
