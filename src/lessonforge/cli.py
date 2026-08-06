@@ -162,11 +162,99 @@ def batch(
 
 @app.command()
 def evolve(
-    since: str = typer.Option("7d", "--since", help="Mine failures from the last N days/runs."),
+    since: str = typer.Option("30d", "--since", help="Mine failures from the last N days (e.g. 7d, 30d)."),
     dry_run: bool = typer.Option(False, "--dry-run", help="Show proposed changes without promoting."),
+    auto: bool = typer.Option(False, "--auto", help="Skip human approval gate (CI mode)."),
+    provider: str = typer.Option("groq", "--provider", help="LLM provider for the analyst call."),
+    top_n: int = typer.Option(10, "--top-n", help="Max failure clusters to analyse."),
 ) -> None:
-    """[bold]Self-evolution[/bold]: mine failures, propose prompt/rubric patches, validate, gate."""
-    console.print(f"[yellow]⚙  M0 stub — evolve wired in M8. since={since} dry_run={dry_run}[/yellow]")
+    """[bold]Self-evolution[/bold]: mine failures, diagnose root causes, propose and gate prompt fixes."""
+    from rich.table import Table
+
+    from lessonforge.config import AppConfig
+    from lessonforge.evolve import analyst as analyst_mod
+    from lessonforge.evolve import miner as miner_mod
+    from lessonforge.evolve import promoter as promoter_mod
+    from lessonforge.llm.gateway import Gateway
+    from lessonforge.memory import db
+
+    cfg = AppConfig()
+    require_human = cfg._raw.get("evolve", {}).get("require_human_approval", True)
+
+    # Parse since string (e.g. "30d", "7d")
+    since_days = int(since.rstrip("d"))
+
+    console.print(
+        Panel(
+            f"[bold]lessonforge evolve[/bold]\n"
+            f"since=[cyan]{since}[/cyan]  top-n=[cyan]{top_n}[/cyan]"
+            + ("  [yellow]DRY RUN[/yellow]" if dry_run else ""),
+            title="[bold magenta]LessonForge Evolve[/bold magenta]",
+        )
+    )
+
+    # ── Step 1: Mine ──────────────────────────────────────────────────────────
+    db.init_db()
+    with console.status("[green]Mining failure clusters…"):
+        clusters = miner_mod.mine(since_days=since_days, top_n=top_n)
+        pass_rate = miner_mod.first_attempt_pass_rate(since_days=since_days)
+
+    console.print(f"\n[bold]Found {len(clusters)} failure cluster(s)[/bold] — first-attempt pass rate: [cyan]{pass_rate * 100:.1f}%[/cyan]\n")
+
+    if not clusters:
+        console.print("[green]✓[/green] No recurring failures found. Nothing to evolve.")
+        return
+
+    # ── Step 2: Diagnose ──────────────────────────────────────────────────────
+    with console.status("[green]Calling evolve analyst…"):
+        gw = Gateway(provider=provider, run_id="evolve")
+        diagnoses = analyst_mod.diagnose(clusters, pass_rate, gw, cfg)
+
+    if not diagnoses:
+        console.print("[yellow]⚠[/yellow] Analyst returned no diagnoses.")
+        return
+
+    # ── Step 3: Display proposals ─────────────────────────────────────────────
+    table = Table(title="Proposed Fixes", show_lines=True)
+    table.add_column("Check", style="cyan", no_wrap=True)
+    table.add_column("Root Cause", style="dim")
+    table.add_column("Fix Type", style="yellow")
+    table.add_column("Proposed Fix", max_width=60)
+
+    for d in diagnoses:
+        fix_text = (
+            d.proposed_fix.guardrail_text or d.proposed_fix.description
+        )
+        table.add_row(d.check_id, d.root_cause, d.proposed_fix.fix_type, fix_text[:100])
+    console.print(table)
+
+    # ── Step 4: Gate ──────────────────────────────────────────────────────────
+    proceed = False
+    if dry_run:
+        console.print("\n[yellow]DRY RUN — no changes written.[/yellow]")
+        proceed = False
+    elif auto or not require_human:
+        console.print("\n[green]Auto-promoting (--auto or require_human_approval=false).[/green]")
+        proceed = True
+    else:
+        confirm = typer.confirm(f"\nPromote {len(diagnoses)} fix(es) to active guardrails?")
+        proceed = confirm
+
+    if not proceed:
+        console.print("[dim]Aborted.[/dim]")
+        return
+
+    # ── Step 5: Promote ───────────────────────────────────────────────────────
+    with console.status("[green]Promoting approved fixes…"):
+        changes = promoter_mod.promote(diagnoses, dry_run=False, config=cfg)
+
+    for ch in changes:
+        console.print(f"[green]✓[/green] {ch}")
+
+    console.print(f"\n[bold green]Evolution complete — {len(changes)} change(s) promoted.[/bold green]")
+    console.print("  Next run: [dim]lessonforge run[/dim] will pick up the new guardrails automatically.\n")
+
+
 
 
 # ── report ────────────────────────────────────────────────────────────────────

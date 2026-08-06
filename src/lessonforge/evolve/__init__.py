@@ -1,1 +1,2 @@
-"""Stub modules for sub-packages — filled in later milestones."""
+"""Evolve package."""
+from __future__ import annotations
