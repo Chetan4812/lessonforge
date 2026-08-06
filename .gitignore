@@ -1,0 +1,38 @@
+# Assessment source files (not part of the deliverable repo)
+GenAI Engineer - Content Systems _ Take-Home Assessment.docx
+LessonForge — Self-Evaluating Lesson Content Gener b963b73c0b92477fb6c1dbc98a421be3.md
+doc_content.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Testing & linting caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment
+.env
+*.env.local
+
+# LessonForge runtime
+.cache/
+out/
+*.faiss
+
+# IDE
+.vscode/
+.idea/
+*.swp

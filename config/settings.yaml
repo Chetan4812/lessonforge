@@ -1,0 +1,72 @@
+version: "1.0"
+max_attempts: 3                # 1 initial + 2 retries, per the brief
+max_cost_usd_per_run: 1.50
+node_timeout_s: 120
+seed: 20260806
+
+models:
+  blueprint:
+    id: "gpt-4.1"
+    temperature: 0.4
+  generator:
+    id: "gpt-4.1"
+    temperature: 0.7
+  judge_accuracy:
+    id: "claude-sonnet-4-5"   # cross-family on purpose — reduces model blind-spot overlap
+    temperature: 0.0
+  judge_language:
+    id: "gpt-4.1-mini"
+    temperature: 0.0
+  judge_pedagogy:
+    id: "claude-sonnet-4-5"
+    temperature: 0.2
+  judge_coverage:
+    id: "gpt-4.1-mini"
+    temperature: 0.0
+  persona:
+    id: "gpt-4.1-mini"
+    temperature: 0.6
+  critique:
+    id: "gpt-4.1"
+    temperature: 0.2
+  evolve_analyst:
+    id: "claude-sonnet-4-5"
+    temperature: 0.3
+
+self_consistency:
+  checks: ["ACC-01", "EXM-02"]
+  n: 3
+
+grounding:
+  chunk_tokens: 250
+  overlap_tokens: 40
+  top_k: 8
+  max_pack_tokens: 3500
+  embedder: "sentence-transformers/all-MiniLM-L6-v2"
+
+lesson:
+  min_words: 900
+  max_words: 1800
+  max_fk_grade: 9.0
+  max_avg_sentence_words: 20
+  required_sections:
+    - hook
+    - what_it_is
+    - why_it_matters
+    - how_it_works
+    - analogy
+    - worked_example
+    - common_mistakes
+    - glossary
+    - recap
+    - check_yourself
+    - next_steps
+
+memory:
+  guardrail_promotion_threshold: 3
+  max_injected_guardrails: 12
+  cluster_similarity_threshold: 0.85
+
+evolve:
+  min_first_pass_improvement_points: 5.0
+  require_human_approval: true

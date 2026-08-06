@@ -1,0 +1,186 @@
+# Rubric v1 — 16 hard pass/fail checkpoints
+# Each checkpoint: id, dimension, description, fail_condition, severity, judged_by
+# Versioned: self-evolution job may produce rubric.v2.yaml
+
+version: "v1"
+
+checkpoints:
+
+  # ── Dimension A: Accurate & Grounded ─────────────────────────────────────
+
+  - id: ACC-01
+    dimension: accuracy
+    description: "No factual errors about RAG"
+    fail_condition: >
+      Any statement contradicting the grounding pack, e.g.
+      "RAG retrains the model on your documents",
+      "RAG eliminates hallucination completely"
+    severity: hard
+    judged_by: "judge:accuracy"
+
+  - id: ACC-02
+    dimension: accuracy
+    description: "Every factual claim is source-tagged"
+    fail_condition: >
+      Any sentence asserting a technical fact without a [Sx] tag
+      resolvable in the grounding pack
+    severity: hard
+    judged_by: "judge:accuracy"
+
+  - id: ACC-03
+    dimension: accuracy
+    description: "No invented statistics, dates, or named systems"
+    fail_condition: >
+      Any number, %, year, or product name not present in the grounding pack
+    severity: hard
+    judged_by: "judge:accuracy"
+
+  - id: ACC-04
+    dimension: accuracy
+    description: "Honest about limitations"
+    fail_condition: >
+      Lesson never states or implies RAG is a complete solution to hallucination
+      / always correct
+    severity: hard
+    judged_by: "judge:accuracy"
+
+  # ── Dimension B: Beginner-Friendly Language ───────────────────────────────
+
+  - id: LNG-01
+    dimension: language
+    description: "Readability gate"
+    fail_condition: >
+      Flesch-Kincaid grade > 9.0 OR average sentence length > 20 words
+    severity: hard
+    judged_by: "deterministic"
+
+  - id: LNG-02
+    dimension: language
+    description: "No unexplained jargon"
+    fail_condition: >
+      Any term on the jargon_watchlist appearing before its
+      plain-language definition
+    severity: hard
+    judged_by: "deterministic+judge:language"
+
+  - id: LNG-03
+    dimension: language
+    description: "No idioms / culture-specific references"
+    fail_condition: >
+      Any idiom, sports metaphor, or Western-culture-only reference an
+      Indian non-English-medium learner would miss
+    severity: hard
+    judged_by: "judge:language"
+
+  - id: LNG-04
+    dimension: language
+    description: "Sentences are declarative and short"
+    fail_condition: "> 15% of sentences contain 2+ subordinate clauses"
+    severity: advisory
+    judged_by: "judge:language"
+
+  # ── Dimension C: Teaches by Example ──────────────────────────────────────
+
+  - id: EXM-01
+    dimension: pedagogy
+    description: "Contains ≥1 concrete end-to-end worked example"
+    fail_condition: >
+      No traceable example that follows a single query from
+      question → retrieval → answer
+    severity: hard
+    judged_by: "judge:pedagogy"
+
+  - id: EXM-02
+    dimension: pedagogy
+    description: "Example is culturally grounded for the audience"
+    fail_condition: >
+      Example uses only abstract/foreign scenarios instead of something like a
+      college exam FAQ bot or a government scheme helpdesk
+    severity: hard
+    judged_by: "judge:pedagogy"
+
+  - id: EXM-03
+    dimension: pedagogy
+    description: "Contains ≥1 analogy for the core mechanism"
+    fail_condition: "No analogy explaining retrieval-before-answering"
+    severity: hard
+    judged_by: "judge:pedagogy"
+
+  - id: EXM-04
+    dimension: pedagogy
+    description: "Contrast case present"
+    fail_condition: >
+      Lesson never shows what the non-RAG answer would look like,
+      so the value isn't felt
+    severity: hard
+    judged_by: "judge:pedagogy"
+
+  # ── Dimension D: Coverage ─────────────────────────────────────────────────
+
+  - id: COV-01
+    dimension: coverage
+    description: "Explains what RAG is"
+    fail_condition: "Missing plain definition in first 200 words"
+    severity: hard
+    judged_by: "judge:coverage"
+
+  - id: COV-02
+    dimension: coverage
+    description: "Explains why it matters"
+    fail_condition: >
+      Missing the problem it solves (stale/absent knowledge, hallucination,
+      no citations, cost of retraining)
+    severity: hard
+    judged_by: "judge:coverage"
+
+  - id: COV-03
+    dimension: coverage
+    description: "Explains how it works, all 5 stages"
+    fail_condition: >
+      Missing any of: chunk/index the documents · turn the question into a
+      searchable form · retrieve relevant pieces · stuff them into the prompt ·
+      generate the grounded answer
+    severity: hard
+    judged_by: "judge:coverage"
+
+  - id: COV-04
+    dimension: coverage
+    description: "Defines every term it introduces"
+    fail_condition: >
+      Any term in blueprint.must_define_terms absent from the glossary section
+    severity: hard
+    judged_by: "deterministic"
+
+  # ── Dimension E: Coherent Teaching Flow ──────────────────────────────────
+
+  - id: FLW-01
+    dimension: flow
+    description: "No forward references"
+    fail_condition: "A concept is used before it is introduced"
+    severity: hard
+    judged_by: "judge:pedagogy"
+
+  - id: FLW-02
+    dimension: flow
+    description: "Mandatory section schema present and ordered"
+    fail_condition: "Any required section missing or out of order"
+    severity: hard
+    judged_by: "deterministic"
+
+  - id: FLW-03
+    dimension: flow
+    description: "Length within budget"
+    fail_condition: "< 900 or > 1800 words (≈ 12 min read)"
+    severity: hard
+    judged_by: "deterministic"
+
+  # ── Dimension F: Comprehension Proof ─────────────────────────────────────
+
+  - id: PRB-01
+    dimension: comprehension
+    description: "Simulated learner comprehension"
+    fail_condition: >
+      The persona, answering closed-book-from-lesson-only, gets < 4/5
+      auto-generated comprehension questions correct
+    severity: hard
+    judged_by: "persona_probe"

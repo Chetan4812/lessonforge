@@ -1,0 +1,42 @@
+# Phrases that the generator must never produce.
+# These are caught by banned.py (LNG-03 partial) as a cheap deterministic pre-check.
+# Add new entries here; no code change required.
+
+phrases:
+  # AI-content clichés
+  - "delve"
+  - "tapestry"
+  - "in today's fast-paced world"
+  - "unlock the power"
+  - "game-changer"
+  - "it's important to note"
+  - "it is worth noting"
+  - "needless to say"
+  - "revolutionize"
+  - "transformative"
+  - "cutting-edge"
+  - "at the end of the day"
+  - "in a nutshell"
+  - "leverage"          # when used as a verb (e.g. "leverage AI")
+  - "utilize"           # prefer "use"
+  - "facilitate"        # prefer "help" or "make possible"
+
+  # Western / sports idioms that Indian non-English-medium learners may miss
+  - "it's a whole different ball game"
+  - "hit it out of the park"
+  - "slam dunk"
+  - "in the ballpark"
+  - "on the same page"
+  - "touch base"
+  - "circle back"
+  - "move the needle"
+  - "boil the ocean"
+  - "low-hanging fruit"
+
+  # Overclaims that violate ACC-04
+  - "eliminates hallucination"
+  - "completely eliminates"
+  - "always correct"
+  - "100% accurate"
+  - "solves hallucination"
+  - "removes hallucination"

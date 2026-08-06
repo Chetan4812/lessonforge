@@ -1,0 +1,31 @@
+# Terms that must be defined in plain language before (or at) first use in the body.
+# A term "passes" LNG-02 only if:
+#   (a) a definition pattern (X means…, X is…, X — …) appears within N words of first use, OR
+#   (b) it appears in the glossary section before any body section uses it.
+
+terms:
+  - embedding
+  - vector
+  - corpus
+  - inference
+  - parametric
+  - hallucination
+  - index
+  - token
+  - retrieval
+  - chunk
+  - cosine similarity
+  - dense retrieval
+  - sparse retrieval
+  - context window
+  - fine-tuning
+  - neural network
+  - latent space
+  - semantic search
+  - approximate nearest neighbour
+  - transformer
+  - attention
+  - encoder
+  - decoder
+  - prompt
+  - ground truth

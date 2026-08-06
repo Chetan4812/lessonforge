@@ -1,0 +1,17 @@
+label: "in_12th_grade_zero_background"
+education: "12th grade pass, India, non-English-medium schooling"
+english_level: "CEFR A2-B1: understands short simple sentences; struggles with abstract nouns, idioms, latinate vocabulary"
+prior_knowledge:
+  - "basic computer use"
+  - "has used ChatGPT once or twice"
+unknown_terms:
+  - "embedding"
+  - "vector"
+  - "corpus"
+  - "inference"
+  - "parametric"
+  - "hallucination"
+  - "index"
+  - "token"
+motivation: "wants a job in AI, needs to feel the topic is learnable"
+reading_budget_minutes: 12
