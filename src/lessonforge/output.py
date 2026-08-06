@@ -16,6 +16,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from lessonforge.config import OUT_DIR, AppConfig
+from lessonforge.render.html_report import render_html_report
 from lessonforge.state import RunState
 
 logger = logging.getLogger(__name__)
@@ -37,8 +38,10 @@ def write_outputs(state: RunState, config: AppConfig | None = None) -> Path:
     _write_lesson_md(state, run_dir)
     _write_report_json(state, run_dir)
     _write_trace_json(state, run_dir)
+    report_path = render_html_report(state, run_dir)
 
     logger.info("[output] wrote artefacts to %s", run_dir)
+    logger.info("[output] report.html  → %s", report_path)
     return run_dir
 
 
